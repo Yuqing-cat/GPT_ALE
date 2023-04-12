@@ -1,0 +1,62 @@
+{
+    "data": {
+        "label_subset": {
+            "Company": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "EducationalInstitution": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Athlete": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Artist": {
+                "train": 0.05,
+                "test": 1.0
+            },
+            "OfficeHolder": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "MeanOfTransportation": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Building": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "NaturalPlace": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Village": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Animal": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Plant": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Album": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Film": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "WrittenWork": {
+                "train": 1.0,
+                "test": 1.0
+            }
+        }
+    }
+}

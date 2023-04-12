@@ -1,0 +1,24 @@
+name: gpt_ale
+
+channels:
+- conda-forge
+
+dependencies:
+- pip
+- python=3.9
+- pip:
+  - openai
+  - torch
+  - transformers
+  - datasets
+  - scikit-learn
+  - scipy
+  - pandas
+  - sqlalchemy
+  - pyodbc
+  - matplotlib
+  - seaborn
+  - umap-learn
+  - azureml-mlflow
+  - mlflow
+  - rpdb

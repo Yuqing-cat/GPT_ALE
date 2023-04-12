@@ -1,0 +1,9 @@
+{
+    "sme": {
+        "label_dict": {
+            "Artist": 2,
+            "Athlete": 3,
+            "Politician": 4
+        }
+    }
+}

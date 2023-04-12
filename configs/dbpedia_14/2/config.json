@@ -1,0 +1,18 @@
+{
+    "data": {
+        "label_subset": {
+            "Athlete": {
+                "train": 1.0,
+                "test": 1.0
+            },
+            "Artist": {
+                "train": 0.05,
+                "test": 1.0
+            },
+            "OfficeHolder": {
+                "train": 1.0,
+                "test": 1.0
+            }
+        }
+    }
+}

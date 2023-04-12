@@ -1,0 +1,15 @@
+openai
+torch
+transformers
+datasets
+scikit-learn
+scipy
+pandas
+sqlalchemy
+pyodbc
+matplotlib
+seaborn
+umap-learn
+mlflow
+azureml-mlflow
+rpdb

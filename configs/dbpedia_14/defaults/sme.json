@@ -1,0 +1,23 @@
+{
+    "sme": {
+        "label_dict": {
+            "Company": 0,
+            "EducationalInstitution": 1,
+            "Artist": 2,
+            "Athlete": 3,
+            "OfficeHolder": 4,
+            "MeanOfTransportation": 5,
+            "Building": 6,
+            "NaturalPlace": 7,
+            "Village": 8,
+            "Animal": 9,
+            "Plant": 10,
+            "Album": 11,
+            "Film": 12,
+            "WrittenWork": 13
+        },
+        "budget": 200,
+        "mapping_file": "mapping.json",
+        "error_rate": 0.0
+    }
+}
