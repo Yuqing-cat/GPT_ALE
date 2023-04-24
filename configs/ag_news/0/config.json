@@ -1,0 +1,7 @@
+{
+    "data": {
+        "data_path": "data",
+        "dataset": "ag_news",
+        "subset": "ag_news"
+    }
+}

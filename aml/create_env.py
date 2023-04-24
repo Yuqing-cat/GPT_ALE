@@ -32,7 +32,7 @@ def main(config):
     )
 
     environment = Environment(
-        name="palantir",
+        name="gpt_ale",
         build=build
         )
 

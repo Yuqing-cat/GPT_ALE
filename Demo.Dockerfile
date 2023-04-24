@@ -3,9 +3,9 @@
 # Stage 1: build frontend ui
 FROM mcr.microsoft.com/cbl-mariner/base/nodejs:16 as ui-build
 
-COPY ./palantir_ui /usr/src/palantir_ui
+COPY ./gpt_ale_ui /usr/src/gpt_ale_ui
 
-WORKDIR /usr/src/palantir_ui 
+WORKDIR /usr/src/gpt_ale_ui 
 
 RUN npm install && npm run build
 
@@ -13,16 +13,16 @@ RUN npm install && npm run build
 
 FROM mcr.microsoft.com/devcontainers/python:dev-3.9
 
-COPY ./palantir_api /usr/src/palantir_api
+COPY ./gpt_ale_api /usr/src/gpt_ale_api
 
-WORKDIR /usr/src/palantir_api
+WORKDIR /usr/src/gpt_ale_api
 
 RUN pip install -r requirements.txt
 
-RUN apt-get update -y && apt-get install -y sqlite3 nginx openssh-server
+RUN apt-get update -y && apt-get install -y nginx openssh-server
 
 COPY ./deploy/nginx.conf /etc/nginx/nginx.conf
-COPY --from=ui-build /usr/src/palantir_ui/build /usr/share/nginx/html
+COPY --from=ui-build /usr/src/gpt_ale_ui/build /usr/share/nginx/html
 
 RUN echo "root:Docker!" | chpasswd 
 

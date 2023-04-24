@@ -1,0 +1,11 @@
+{"sme": {
+    "label_dict": {
+        "anger": 0,
+        "joy":1,
+        "optimism":2,
+        "sadness":3
+        },
+    "budget": 40,
+    "mapping_file": "mapping.json"
+    }
+}

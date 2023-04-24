@@ -93,7 +93,7 @@ def main(config):
         config['model']['model_weights_best']  = os.path.join(config["misc"]["output_path"], dataset + "_" + subset + "_student_best.pt")
     
     # Set the experiment
-    mlflow.set_experiment("Palantir")
+    mlflow.set_experiment("gpt_ale")
     # Start the run
     mlflow_run = mlflow.start_run()
     mlflow_info = mlflow_run.to_dictionary()['info']

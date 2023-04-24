@@ -1,75 +1,70 @@
-# Guidance to prepare your DSVM to run GPT_ALE
+# Guidance to prepare your DSVM to run GPT-ALE
 
 ## Prerequisites
 
-Finish the step in [Here](./provision_azure_resources.md) and log in to your DSVM.
+To run GPT-ALE, you need to have the following resources:
+
+1. An Azure DSVM (recommended VM Size: "Standard NC6 Promo")
+2. An Azure Storage Account
+
+Please create these resources in the [Azure Portal](https://portal.azure.com/) before you proceed.
 
 ## Setup steps
 
-### 1. Clone GPT_ALE Repo
+Connect to your DSVM using SSH. We like to do this by using VS Code with the SSH extension.
+
+### Clone GPT-ALE Repo
 
 ```
 cd ~
-git clone https://github.com/Azure/GPT_ALE.git
-cd GPT_ALE
+git clone https://github.com/Azure/GPT_ALE
 ```
 
-### 2. Setup conda environment
-To run GPT_ALE on the DSVM, we have configured all required dependent packages in a yml file, you can use this file to create an Anaconda environment. 
+### 2. Setup Conda environment
 
-The configuration file can be found at [Here](../environment.yml)
+To run GPT-ALE on the DSVM, we have configured all required dependency packages in a yml file, you can use this file to create an Anaconda environment. 
 
-To create a new conda environment, use following commands:
+The configuration file can be found [here](../environment.yml)
+
+To create the new conda environment, use following commands:
 ```
-conda env create -f environment.yml
+conda env create -f ~/GPT_ALE/environment.yml
 ```
 
-After the above command finishes (this may take a few minutes), activate the conda environment, all the following steps can be done in the conda environment.
+After the above command finishes, activate the conda environment, all the following steps can be done in the conda environment.
 
 ```
 conda activate gpt_ale
 ```
 
+
 ### 3. Mount the storage blob
 
-We use blobfuse to mount a stoarge blob to local disk of the VM. 
-To get this ready, 3 steps are required:
-* Automatic mount
+> ``Note:`` The following instructions are for blobfuse version 1.0.2. If you are using a different version, or you don't have blobfuse installed yet, please refer to the [blobfuse documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-how-to-mount-container-linux).
 
-    Use following commands to automatically mount the blob.
+We use blobfuse to mount a storage blob to local disk of the VM.
 
-        sh ~/GPT_ALE/docs/setup_files/mount_blob.sh <your storage account name> '<you sas token>'
-        
-* Manual mount
-    * Create fuse_configuration.cfg at /home/<your_dsvm_user_name> (you can also use ~ instead.), copy the content of [fuse_configuration.cfg](./setup_files/fuse_configuration.cfg), then replace <your_storage_account_name>, <your_sas_token> with the real value.
+Please complete the following steps to mount the storage blob:
 
-        > Remember to grant **read**, **add**, **create**, **delete**, **write** and **list** access for your SAS token
+* Copy the file [fuse_configuration_template.cfg](../configs/fuse_configuration_template.cfg). 
 
-    * Create mount_storage.sh at ~ directory, copy and paste the content of [mount_storage.sh](./setup_files/mount_storage.sh), then replace <your_DSVM_username> with the real value.
+`cp ./configs/fuse_configuration_template.cfg ./configs/fuse_configuration.cfg`
 
-    * Mount the storage blob with following command:
-    ```
-    sudo sh ~/mount_storage.sh
-    ```
+* Replace <your_storage_account_name>, <your_sas_token> with the account name of your blob storage account and your shared access signature of your container.
 
-After this, you can navigate to /mnt/blob_storage to verify the mount is succeeded.
+        Tips: remember to grant read AND write access for your SAS token
 
-### 4. Prepare storage container
+* Execute the script [scripts/mount_storage.sh](../scripts/mount_storage.sh), then replace <your_DSVM_username> with the real value.
 
-After the blob has been mounted, run following script to prepare data for your storage.
-
+* Mount the storage blob with following command:
 ```
-sh ~/GPT_ALE/docs/setup_files/prepare_storage.sh 
+sh configs/mount_storage.sh
 ```
 
-### 5. Run the script
+> The script will prompt you for a "sudo password". This is simply the password you use to log into your DSVM.
 
-```
-python active_learning/run.py
-```
+After this, you can navigate to /mnt/blob_storage to verify the mount succeeded.
 
-If no error pops up, the DSVM is ready for now.
+## Next steps
 
-### Final Step
-
-Go to the address of you web app, and start playing with it.
+Return to the main [Readme](../README.md) and follow the steps under [Getting-Started](../README.md#getting-started)

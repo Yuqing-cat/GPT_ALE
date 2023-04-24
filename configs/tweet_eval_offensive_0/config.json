@@ -1,0 +1,52 @@
+{
+"data":
+    {
+        "data_path": "data",
+        "dataset": "tweet_eval",
+        "subset": "offensive",
+        "text_column": "text",
+        "label_column": "label",
+        "train": "train",
+        "validation": "validation",
+        "metric": "accuracy",
+        "use_embeddings": true,
+        "sample_size": 0.1,
+        "label_dict":{
+            "unknown": -1},
+        "label_subset": {}
+    },
+"model":
+    {
+        "checkpoint": "bert-base-uncased",
+        "lr": 5e-5,
+        "weight_decay": 0.01,
+        "batch_size": 512,
+        "batches_per_worker": 10,
+        "num_epochs": 3000,
+        "eval_interval": 100,
+        "num_workers": 5,
+        "use_embeddings": false
+    },
+"samplers":
+    {
+        "cluster_based_sampler":
+        {
+            "max_epochs": 100
+        }
+    },
+"misc":
+    {
+        "use_gpt3_for_sme": false,
+        "use_gpt3_for_student": false,
+        "log_level": "INFO",
+        "iterations" : 25,
+        "batch_size" : 128,
+        "num_epochs" : 1000,
+        "total_samples_sme" : 128,
+        "samples_per_iteration" : 256,
+        "samples_per_test" : 1024,
+        "patience_inner_loop" : 1,
+        "patience_outer_loop" : 1,
+        "patience_model_main" : 5
+    }
+}

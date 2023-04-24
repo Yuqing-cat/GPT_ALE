@@ -1,0 +1,44 @@
+{
+"data":
+    {
+        "data_path": "active_learning/data",
+        "dataset": "tweet_eval",
+        "subset": "emotion",
+        "text_column": "text",
+        "label_column": "label",
+        "train": "train",
+        "validation": "validation",
+        "metric": "accuracy",
+        "use_embeddings": true,
+        "sample_size": 0.1,
+        "label_dict":{
+            "anger": 0,
+            "joy": 1,
+            "optimism": 2,
+            "sadness": 3}
+    },
+"model":
+    {
+        "checkpoint": "bert-base-uncased",
+        "lr": 5e-5,
+        "weight_decay": 0.01,
+        "batch_size": 512,
+        "batches_per_worker": 10,
+        "num_epochs": 3000,
+        "eval_interval": 100,
+        "num_workers": 5,
+        "use_embeddings": false
+    },
+"sql":
+    {
+        "username": "azureuser",
+        "password": "",
+        "driver": "ODBC Driver 18 for SQL Server",
+        "server": "jgi-sql.database.windows.net",
+        "database": "tutorial-db"
+    },
+"openai":
+    {
+        "api_key":""
+    }
+}
