@@ -1,0 +1,8 @@
+azure-storage-blob
+fastapi
+uvicorn
+pandas
+scikit-learn
+rpdb
+mlflow
+boto3

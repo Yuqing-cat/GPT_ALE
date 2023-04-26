@@ -1,0 +1,19 @@
+.title {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: -2px 0;
+}
+
+.stepPoint {
+  position: absolute;
+  z-index: -1;
+  width: 20px;
+  height: 20px;
+}
+
+.scatterChart {
+  > div:nth-child(2) {
+    z-index: -1 !important;
+  }
+}

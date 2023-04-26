@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourcePrefix": {
-            "defaultValue": "palantir",
+            "defaultValue": "gptale",
             "minLength": 3,
             "maxLength": 15,
             "type": "string",
@@ -30,7 +30,7 @@
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2022-07-01",
             "name": "[variables('IPAddresses_name')]",
-            "location": "westus",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard",
                 "tier": "Regional"
@@ -89,12 +89,12 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-03-01",
             "name": "[variables('AppPlan_name')]",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "sku": {
-                "name": "P1v3",
-                "tier": "PremiumV3",
-                "size": "P1v3",
-                "family": "Pv3",
+                "name": "P1v2",
+                "tier": "PremiumV2",
+                "size": "P1v2",
+                "family": "Pv2",
                 "capacity": 1
             },
             "kind": "linux",
@@ -115,7 +115,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2022-11-01",
             "name": "[variables('DSVM_name')]",
-            "location": "westus",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', variables('NIC_name'))]"
             ],
@@ -145,7 +145,7 @@
                 },
                 "osProfile": {
                     "computerName": "[variables('DSVM_name')]",
-                    "adminUsername": "palantirtest",
+                    "adminUsername": "gptaletest",
                     "adminPassword":"[parameters('adminPassword')]",
                     "linuxConfiguration": {
                         "disablePasswordAuthentication": false,
@@ -245,7 +245,10 @@
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2022-07-01",
             "name": "[variables('VNet_name')]",
-            "location": "westus",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG_name'))]"
+            ],
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -352,7 +355,7 @@
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-03-01",
             "name": "[variables('WebApp_name')]",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('AppPlan_name'))]"
             ],
@@ -392,6 +395,14 @@
                           "value": "false"
                         },
                         {
+                            "name": "AZURE_CLIENT_ID",
+                            "value": "REPLACE_THIS"
+                        },
+                        {
+                            "name": "AZURE_TENANT_ID",
+                            "value": "REPLACE_THIS"
+                        },
+                        {
                           "name": "DOCKER_REGISTRY_SERVER_URL",
                           "value": "palantirdemoacr.azurecr.io"
                         },
@@ -428,7 +439,7 @@
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-03-01",
             "name": "[concat(variables('WebApp_name'), '/ftp')]",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', variables('WebApp_name'))]"
             ],
@@ -440,7 +451,7 @@
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-03-01",
             "name": "[concat(variables('WebApp_name'), '/scm')]",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', variables('WebApp_name'))]"
             ],
@@ -452,7 +463,7 @@
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2022-03-01",
             "name": "[concat(variables('WebApp_name'), '/web')]",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', variables('WebApp_name'))]"
             ],
@@ -478,7 +489,7 @@
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$palantirwebapp",
+                "publishingUsername": "$gpt_alewebapp",
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
@@ -533,12 +544,12 @@
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2022-03-01",
             "name": "[concat(variables('WebApp_name'), '/', variables('WebApp_name'), '.azurewebsites.net')]",
-            "location": "East US",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', variables('WebApp_name'))]"
             ],
             "properties": {
-                "siteName": "palantirwebapp",
+                "siteName": "gpt_alewebapp",
                 "hostNameType": "Verified"
             }
         },
@@ -546,7 +557,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2022-07-01",
             "name": "[variables('NIC_name')]",
-            "location": "westus",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/publicIPAddresses', variables('IPAddresses_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('VNet_name'), 'default')]",
@@ -565,7 +576,7 @@
                             "privateIPAddress": "10.0.0.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "name": "palantir-dsvm-ip",
+                                "name": "gpt_ale-dsvm-ip",
                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('IPAddresses_name'))]",
                                 "properties": {
                                     "provisioningState": "Succeeded",
@@ -608,7 +619,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2022-07-01",
             "name": "[variables('NSG_name')]",
-            "location": "westus",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
                     {

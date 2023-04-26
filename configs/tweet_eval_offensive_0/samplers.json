@@ -1,0 +1,17 @@
+{
+    "atl_sampler": {
+        "output_dim": 2,
+        "max_epochs": 1000,
+        "patience": 10,
+        "tolerance": 0.99,
+        "batch_size": 64,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "alpha": 0.9
+    }, "cluster_based_sampler": {
+        "n_random": 3,
+        "n_centroid": 1,
+        "n_outlier": 1,
+        "max_epochs": 100
+    }
+}

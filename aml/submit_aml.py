@@ -60,10 +60,10 @@ def submit(config):
                     python active_learning/run.py --config_path ${{inputs.config_path}} --config data.data_path=${{inputs.data_path}} 
                     """,
             inputs=inputs,
-            environment='palantir:2',
+            environment='gpt_ale:2',
             compute="gpu-cluster-ssh",
-            # display_name="palantir-benchmarking",
-            description="Benchmarking run for Palantir",
+            # display_name="gpt_ale-benchmarking",
+            description="Benchmarking run for gpt_ale",
             tags={"tag": inputs['config_path']},
         )
 
@@ -85,10 +85,10 @@ def submit(config):
     #                     python active_learning/run.py --config_path ${{inputs.config_path}} --config data.data_path=${{inputs.data_path}} misc.gpt3_error_rate=${{inputs.gpt3_error_rate}} 
     #                     """,
     #             inputs=inputs,
-    #             environment='palantir:1',
+    #             environment='gpt_ale:1',
     #             compute="gpu-cluster",
-    #             # display_name="palantir-benchmarking",
-    #             description="Benchmarking run for Palantir",
+    #             # display_name="gpt_ale-benchmarking",
+    #             description="Benchmarking run for gpt_ale",
     #             tags={"tag": inputs['config_path'], 'gpt3_error_rate': gpt3_error_rate},
     #         )
 
@@ -109,10 +109,10 @@ def submit(config):
     #                 python active_learning/run.py --config_path ${{inputs.config_path}} --config data.data_path=${{inputs.data_path}} 
     #                 """,
     #         inputs=inputs,
-    #         environment='palantir:1',
+    #         environment='gpt_ale:1',
     #         compute="gpu-cluster",
-    #         # display_name="palantir-benchmarking",
-    #         description="Benchmarking run for Palantir",
+    #         # display_name="gpt_ale-benchmarking",
+    #         description="Benchmarking run for gpt_ale",
     #         tags={"tag": inputs['config_path'], 'budget': budget},
     #     )
 

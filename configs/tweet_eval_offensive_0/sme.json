@@ -1,0 +1,9 @@
+{"sme": {
+    "label_dict": {
+        "non-offensive": 0,
+        "offensive":1
+        },
+    "budget": 40,
+    "mapping_file": "mapping.json"
+    }
+}

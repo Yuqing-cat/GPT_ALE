@@ -1,0 +1,13 @@
+{
+    "sme": {
+        "label_dict": {
+            "World": 0,
+            "Sports": 1,
+            "Business": 2,
+            "Sci/Tech": 3
+        },
+        "budget": 200,
+        "mapping_file": "mapping.json",
+        "error_rate": 0.0
+    }
+}

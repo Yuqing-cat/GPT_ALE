@@ -1,0 +1,10 @@
+{
+    "sql":
+    {
+    "username": "azureuser",
+    "password": "GBjwfzdeM45-7-N",
+    "driver": "ODBC Driver 18 for SQL Server",
+    "server": "jgi-sql.database.windows.net",
+    "database": "tutorial-db"
+    }
+}

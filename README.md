@@ -17,11 +17,9 @@ When the user is satisfied with the performance of the student model, it can be 
 
 This documentation is divided into the following sections:
 
-- [Provision Azure Resources](docs/provision_azure_resources.md) - This describes how to provision the Azure resources needed to run GPT-ALE.
-- [Setup DSVM](docs/setup.md) - This describes how to setup the DSVM to run GPT-ALE.
+- [Provision Azure Resources](docs/provision_azure_resources.md) - Start here; This describes how to provision the Azure resources needed to run GPT-ALE.
 - [ALE Configuration](docs/configuration.md) - This describes the main hyperparameter choices for GPT-ALE
 - [Benchmarking](docs/benchmarking.md) - If you have an annotated dataset, you can use this to benchmark your configuration this dataset, without human interaction.
-- [Front-End Guidance](docs/frontend_guidance.md) - Documentation for the front-end application that interacts with GPT-ALE.
 
 ## Troubleshooting
 
