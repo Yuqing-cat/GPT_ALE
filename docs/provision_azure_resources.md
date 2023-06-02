@@ -21,7 +21,7 @@ You need to have quota to provision the following resources:
  
 ## Post-deployment configuration
 ### AAD configuration
-1. Create an Azure Active Directory (AAD) application to enable authentication on the Feathr UI (which gets created as part of the deployment script). Currently it is not possible to create one through ARM template but you can easily create one by running the following CLI commands in the [Cloud Shell](https://shell.azure.com/bash).
+1. Create an Azure Active Directory (AAD) application to enable authentication on the GPT-ALE UI (which gets created as part of the deployment script). Currently it is not possible to create one through ARM template but you can easily create one by running the following CLI commands in the [Cloud Shell](https://shell.azure.com/bash).
 
 ** Please make note of the Client ID and Tenant ID for the AAD app, you will need it in the ARM template deployment section.**
 
@@ -58,6 +58,9 @@ echo "AZURE_TENANT_ID: $aad_tenantId"
 # Updating the SPA app created above, currently there is no CLI support to add redirectUris to a SPA, so we have to patch manually via az rest
 az rest --method PATCH --uri "https://graph.microsoft.com/v1.0/applications/$aad_objectId" --headers "Content-Type=application/json" --body "{spa:{redirectUris:['https://$sitename.azurewebsites.net']}}"
 ```
+
+You may also manually fill in the values for `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` in the WebApp Configuration as well. 
+
 ### WebApp configuration
 
 The WebApp is configured to use a docker image from the Azure Container Registry (ACR). You can either build your own docker image and push it to your on ACR, or you can contact us for the password for our ACR.
@@ -70,13 +73,15 @@ To configure the WebApp to pull the docker image for gpt-ale, you need to go to 
 | DOCKER_REGISTRY_SERVER_USERNAME   | palantirdemoacr                  | Replace w/ your username, if you are not using our ACR |
 | DOCKER_REGISTRY_SERVER_PASSWORD   | intentionally_left_blank         | **REDACTED**, please contact GPT-ALE Project Team |
 
-Alternative, you can configure the Web App to have ACR imagepull permission. [Yuqing to add more]
+Alternative, you can configure the Web App to have ACR image pull permission. To do so, you need to go to `Settings -> Access Control (IAM) -> Add Role Assignment` and add the role `AcrPull` to the Web App's Managed Identity. Please be aware that it will give the Web App permission to pull any image from the ACR.
+
+![Web App Configuration Sample](./images/webapp-configuration.png)
 
 ### Connection String for Storage Account
 
-The connection string of the storage account need also be added to the WebApp's Configuration Section, with Key "CONNECTION_STR". This should already be set correctly, but it may be worth reviewing it.
+The connection string of the storage account need also be added to the WebApp's Configuration Section, with Key `CONNECTION_STR`. This should already be set correctly, but it may be worth reviewing it.
 
 ### Preparing Storage Blob Storage Container
 
-Get into the storage account, and create a new blob container named "demo".
+Get into the storage account, and create a new blob container named `demo`.
 
